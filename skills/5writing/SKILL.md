@@ -265,6 +265,7 @@ A_code.typ
 国赛 LaTeX 模板（`zh/cumcm-latex`，对应 `cumcm` Typst 版本）：
 
 ```text
+0_abstract.tex
 1_restatement.tex
 2_analysis.tex
 3_assumptions.tex
@@ -272,10 +273,14 @@ A_code.typ
 5_problem1.tex
 6_problem2.tex
 7_problem3.tex
-8_sensitivity.tex
-9_evaluation.tex
+8_problem4.tex
+9_sensitivity.tex
+10_evaluation.tex
+11_ai_declaration.tex
 A_code.tex
 ```
+
+模板默认提供四个问题文件。题目少于四问时删除未使用问题的 `\input` 行和对应文件；题目多于四问时按顺序新增问题文件。该模板自带 `cumcmthesis.cls`、`gbt7714-numerical.bst` 和 `fonts/`，复制模板时必须保留整个目录，并从 `paper/` 目录运行 XeLaTeX。
 
 MCM/ICM LaTeX 模板（`en/mcm-latex`）：
 
@@ -309,7 +314,7 @@ A_code.typ
 
 ### 步骤 5：参考文献
 
-只使用真实存在的参考文献。文件名按引擎选择：Typst 用 `paper/references.typ`，LaTeX 用 `paper/references.tex`。
+只使用真实存在的参考文献。Typst 使用 `paper/references.typ`；LaTeX 使用 `paper/references.tex`。
 
 **Typst 引擎**：
 
@@ -323,7 +328,7 @@ A_code.typ
 
 正文上标引用：`相关研究已用于物流网络优化#super("[1]")。`
 
-**LaTeX 引擎**：
+**LaTeX 模板**：
 
 ```latex
 \begin{thebibliography}{99}

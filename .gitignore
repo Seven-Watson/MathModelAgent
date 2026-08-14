@@ -14,6 +14,11 @@ backend/.env.dev
 # 微软字体（SimHei/SimSun/SimKai）有版权限制，不提交
 # 用户可通过系统字体或安装 Noto CJK 替代
 skills/5writing/templates/**/fonts/
+!skills/5writing/templates/zh/cumcm-latex/fonts/
+!skills/5writing/templates/zh/cumcm-latex/fonts/SourceHanSerifCN-Regular.otf
+!skills/5writing/templates/zh/cumcm-latex/fonts/SourceHanSerifCN-Bold.otf
+!skills/5writing/templates/zh/cumcm-latex/fonts/YaHei.Consolas.1.11b.ttf
+!skills/5writing/templates/zh/cumcm-latex/fonts/Fira Code Retina Nerd Font Complete.otf
 
 # LaTeX 编译产物（用户自行编译生成）
 skills/5writing/templates/**/*.aux

@@ -1,17 +1,14 @@
 \section{符号说明}
-
-\newpage
-\begin{center}
-  {\fontsize{12pt}{14.4pt}\heiti 表 1\quad 主要符号说明}\\[0.6em]
-  \begin{tabular}{ccc}
+\begin{table}[H]
+  \centering
+  \caption{主要符号说明}
+  \label{tab:symbols}
+  \begin{tabularx}{\textwidth}{CL}
     \toprule
-    \textbf{符号} & \textbf{含义} & \textbf{单位} \\
+    符号 & 说明 \\
     \midrule
-    $N$   & 样本数量 & 个 \\
-    $M$   & 特征维度 & 维 \\
-    $X$   & 特征矩阵 & --- \\
-    $y$   & 目标变量 & --- \\
-    $R^2$ & 决定系数 & --- \\
+    $n$ & 样本总数 \\
+    $x_i$ & 第 $i$ 个决策变量 \\
     \bottomrule
-  \end{tabular}
-\end{center}
+  \end{tabularx}
+\end{table}
