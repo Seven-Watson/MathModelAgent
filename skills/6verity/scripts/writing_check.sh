@@ -450,8 +450,9 @@ for path in typ_files:
         lower_name = path.name.lower()
         is_aux_section = (
             path.name.startswith("A_")
-            or lower_name.startswith("abstract")
+            or "abstract" in lower_name
             or lower_name.startswith("appendices")
+            or "ai_declaration" in lower_name
         )
 
         if is_typst:
@@ -481,9 +482,9 @@ for path in typ_files:
             if len(figure_calls) >= 2 and len(text_without_figures.strip()) < 1000:
                 warn(f"many figures but little surrounding prose: {path.name}")
         else:
-            # LaTeX heading check: \section{...}
-            section_headings = re.findall(r"\\section\{([^}]*)\}", text)
-            subsection_headings = re.findall(r"\\subsection\{([^}]*)\}", text)
+            # LaTeX heading check: \section{...} or unnumbered \section*{...}
+            section_headings = re.findall(r"\\section\*?\{([^}]*)\}", text)
+            subsection_headings = re.findall(r"\\subsection\*?\{([^}]*)\}", text)
             if not section_headings and not subsection_headings and not is_aux_section:
                 fail(f"section has no \\section{{}} heading: {path.name}")
             for title in section_headings:
@@ -514,7 +515,14 @@ else:
     image_re = re.compile(r'\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}')
 for path, text in file_texts:
     for ref in image_re.findall(text):
-        target = (path.parent / ref).resolve()
+        # Typst resolves relative to each source file. LaTeX resolves graphics
+        # from the main compilation directory, even when the command is in an
+        # input section file.
+        base = main.parent if is_latex else path.parent
+        target = (base / ref).resolve()
+        if not target.is_relative_to(paper.resolve()):
+            fail(f"image reference escapes paper directory from {rel(path)}: {ref}")
+            continue
         if not target.exists():
             fail(f"referenced image does not exist from {rel(path)}: {ref}")
 

@@ -84,6 +84,7 @@ workflow:
 │   ├── *.drawio                 #     非数据图源文件
 ├── paper/                       # 4: 论文（5writing）
 │   ├── main.typ / main.tex      #     论文主文件（按用户选择的引擎）
+│   ├── figures/                 #     论文实际引用图片的自包含副本
 │   └── sections/                #     各节文件（.typ 或 .tex）
 ```
 
@@ -123,6 +124,6 @@ workflow:
 - `4drawio` 只负责概念图、算法流程图、架构图、路线图等非数据型图示。
 - 不要让 `4drawio` 重复绘制 `3coding-visual` 已经生成的统计图或数据图。
 - `5writing` 负责决定图表在论文中的位置，并按所选引擎写入图表代码：
-  - Typst：`#figure(image("../../figures/xxx.pdf", width: 85%), caption: [...])`
-  - LaTeX：`\begin{figure}[H]\centering\includegraphics[width=0.85\textwidth]{../../figures/xxx.pdf}\caption{...}\label{fig:xxx}\end{figure}`
+  - Typst 章节文件：`#figure(image("../figures/xxx.pdf", width: 85%), caption: [...])`
+  - LaTeX：`\begin{figure}[H]\centering\includegraphics[width=0.85\textwidth]{figures/xxx.pdf}\caption{...}\label{fig:xxx}\end{figure}`
 - 不要让 `5writing` 编造数值结论。论文中的数值必须来自 `RESULTS_REPORT.md`、结果表或已生成图表的数据。

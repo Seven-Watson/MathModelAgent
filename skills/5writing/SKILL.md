@@ -128,13 +128,15 @@ fig_pipeline.pdf -> 数据预处理/方法节
 结果图 -> 对应的结果节
 ```
 
-图片路径相对于写入该图片的文件：写在 `paper/main.typ` 或 `paper/main.tex` 中通常用 `../figures/xxx.pdf`，写在 `paper/sections/*.typ` 或 `paper/sections/*.tex` 中通常用 `../../figures/xxx.pdf`。
+确定实际使用的图片后，创建 `paper/figures/`，只把这些图片从项目根目录 `figures/` 复制进去。论文不得引用 `paper/` 外部的图片，以保证整个 `paper/` 可独立复制、压缩和编译。根目录 `figures/` 仍保留为生成阶段的权威输出；每次图片更新后重新复制同名文件到 `paper/figures/`。
+
+Typst 图片路径相对于当前 `.typ` 文件：在 `paper/main.typ` 中使用 `figures/xxx.pdf`，在 `paper/sections/*.typ` 中使用 `../figures/xxx.pdf`。LaTeX 必须从 `paper/` 目录编译，所有 `paper/main.tex` 和 `paper/sections/*.tex` 中的图片统一使用 `figures/xxx.pdf`。
 
 **Typst 引擎**图片插入：
 
 ```typst
 #figure(
-  image("../../figures/fig_q1_error_dist.pdf", width: 85%),
+  image("../figures/fig_q1_error_dist.pdf", width: 85%),
   caption: [问题一预测误差分布],
 )
 ```
@@ -144,7 +146,7 @@ fig_pipeline.pdf -> 数据预处理/方法节
 ```latex
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.85\textwidth]{../../figures/fig_q1_error_dist.pdf}
+  \includegraphics[width=0.85\textwidth]{figures/fig_q1_error_dist.pdf}
   \caption{问题一预测误差分布}
   \label{fig:q1_error}
 \end{figure}
@@ -383,7 +385,7 @@ xelatex main.tex && xelatex main.tex
 ```latex
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.85\textwidth]{../../figures/fig_q1.pdf}
+  \includegraphics[width=0.85\textwidth]{figures/fig_q1.pdf}
   \caption{图注}
   \label{fig:q1}
 \end{figure}
